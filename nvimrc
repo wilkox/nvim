@@ -11,6 +11,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'vim-pandoc/vim-pandoc-syntax'
 
+  " vim-easymotion
+  Plug 'easymotion/vim-easymotion'
+
 " End plugin block
 call plug#end()
 
