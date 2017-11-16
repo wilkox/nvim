@@ -8,19 +8,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
 
   " vim-pandoc
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
+  Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 
   " vim-easymotion
   Plug 'easymotion/vim-easymotion'
 
+  " Nvim-R
+  Plug 'jalvesaq/Nvim-R'
+
 " End plugin block
 call plug#end()
 
-"" Leader
-" Map Leader to comma
+" Leader
+"" Map Leader to comma
 let mapleader=","
-" Map localleader to backslash
+"" Map localleader to backslash
 let maplocalleader = "\\"
 
 " vim-pandoc settings
@@ -74,7 +77,7 @@ set spellcapcheck=
 "" Remap zl to correct to first option
 nnoremap zl 1z=
 
-"" Remnants of vim-notes for study in stage 2 - remove after 2017
+" Remnants of vim-notes for study in stage 2 - remove after 2017
 "" link_slides
 nnoremap <Leader>os :call link_slides#open_slides()<cr>
 "" Uni study
@@ -83,3 +86,37 @@ function! MakeAnkiFlashCards ()
   ! anki_from_notes.pl "%:p"
 endfunction
 nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
+
+" Nvim-R settings
+"" Press the space bar to send lines (in Normal mode) and selections to R:
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+"" Vertical split for R pane
+let R_tmux_split = 1
+let R_min_editor_width = 70
+"" Disable mapping of "_" to " -> "
+let R_assign = 0
+"" Disable matching of <
+let R_rnowebchunk = 0
+"" Don't clobber the tmux window title
+let R_tmux_title = "automatic"
+"" Don't show R documentation in vim
+let R_nvimpager = "no"
+"" Use my own tmux config
+let R_notmuxcong = 1
+"" R-friendly abbreviations
+iab >> %>%
+iab << <-
+
+" Mouse
+set mouse=a
+
+" In terminal mode, remap Esc so it actually escapes
+tnoremap <Esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+
+" netrw configuration
+"" Tree view by default
+let g:netrw_liststyle = 3
+"" Hide the banner
+let g:netrw_banner = 0
