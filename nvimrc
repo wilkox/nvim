@@ -23,18 +23,18 @@ call plug#begin('~/.vim/plugged')
 " End plugin block
 call plug#end()
 
-" Leader
+" Define the leader and localleader
 "" Map Leader to comma
 let mapleader=","
 "" Map localleader to backslash
 let maplocalleader = "\\"
 
-" deoplete
+" Configure deoplete autocompletion plugin
 let g:deoplete#enable_at_startup = 1
 "" Use TAB to complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" vim-pandoc settings
+" Configure vim-pandoc
 "" Smart auto-formatting with hard wraps
 let g:pandoc#formatting#mode='hA'
 
@@ -58,7 +58,7 @@ colorscheme apprentice
 " Synchronise the unnamed register with the system clipboard
 set clipboard^=unnamed
 
-" Live substitution
+" When writing a substitution expression, preview the result in a split
 set inccommand=split
 
 " Custom keybindings
@@ -67,13 +67,13 @@ inoremap jj <ESC>
 "" ' in normal mode to :
 nnoremap ' :
 
-" Prevent the frustration of entering Ex mode by accidentally typing Q
+" Don't enter Ex mode when Q is accidentally typed
 nnoremap Q <nop>
 
 " Map <Leader>/ (\/) to clearing search highlight
 nmap <Leader>/ :nohlsearch<CR><C-l>
 
-" Spell checking
+" Configure spell checking
 "" Turn spell checking on
 set spell 
 "" Set language to Australian English
@@ -85,21 +85,11 @@ set spellcapcheck=
 "" Remap zl to correct to first option
 nnoremap zl 1z=
 
-" Remnants of vim-notes for study in stage 2 - remove after 2017
-"" link_slides
-nnoremap <Leader>os :call link_slides#open_slides()<cr>
-"" Uni study
-" Function to generate Anki flashcards from notes
-function! MakeAnkiFlashCards ()
-  ! anki_from_notes.pl "%:p"
-endfunction
-nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
-
-" Nvim-R settings
+" Configure nvim-R plugin
 "" Press the space bar to send lines (in Normal mode) and selections to R:
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
-"" Vertical split for R pane
+"" Open R in a vertical split
 let R_tmux_split = 1
 let R_min_editor_width = 70
 "" Disable mapping of "_" to " -> "
@@ -116,20 +106,20 @@ let R_notmuxcong = 1
 iab >> %>%
 iab << <-
 
-" Mouse
+" Allow mouse input
 set mouse=a
 
 " In terminal mode, remap Esc so it actually escapes
 tnoremap <Esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 
-" netrw configuration
+" Configure netrw
 "" Tree view by default
 let g:netrw_liststyle = 3
 "" Hide the banner
 let g:netrw_banner = 0
 
-" Set soft tabs
+" Use soft tabs with a width of two spaces
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
