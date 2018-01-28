@@ -17,6 +17,9 @@ call plug#begin('~/.vim/plugged')
   " Nvim-R
   Plug 'jalvesaq/Nvim-R'
 
+  " deoplete autocompletion
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " End plugin block
 call plug#end()
 
@@ -25,6 +28,11 @@ call plug#end()
 let mapleader=","
 "" Map localleader to backslash
 let maplocalleader = "\\"
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+"" Use TAB to complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " vim-pandoc settings
 "" Smart auto-formatting with hard wraps
@@ -120,3 +128,9 @@ tnoremap jj <C-\><C-n>
 let g:netrw_liststyle = 3
 "" Hide the banner
 let g:netrw_banner = 0
+
+" Set soft tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
