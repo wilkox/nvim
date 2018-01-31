@@ -1,15 +1,11 @@
 " Plugins with vim-plug
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
   " Provides the Apprentice colour scheme
   Plug 'romainl/Apprentice'
 
   " Move between nvim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
-
-  " vim-pandoc
-  Plug 'vim-pandoc/vim-pandoc', {'for': 'markdown'}
-  Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 
   " vim-easymotion
   Plug 'easymotion/vim-easymotion'
@@ -20,8 +16,14 @@ call plug#begin('~/.vim/plugged')
   " deoplete autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+  " vim-commentry
+  Plug 'tpope/vim-commentary'
+
 " End plugin block
 call plug#end()
+
+" Allow filetype plugins
+filetype plugin on
 
 " Define the leader and localleader
 "" Map Leader to comma
@@ -33,10 +35,6 @@ let maplocalleader = "\\"
 let g:deoplete#enable_at_startup = 1
 "" Use TAB to complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Configure vim-pandoc
-"" Smart auto-formatting with hard wraps
-let g:pandoc#formatting#mode='hA'
 
 " Show relative line numbers
 set relativenumber
@@ -98,8 +96,6 @@ let R_assign = 0
 let R_rnowebchunk = 0
 "" Don't clobber the tmux window title
 let R_tmux_title = "automatic"
-"" Don't show R documentation in vim
-let R_nvimpager = "no"
 "" Use my own tmux config
 let R_notmuxcong = 1
 "" R-friendly abbreviations
