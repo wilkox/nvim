@@ -1,5 +1,5 @@
 " Plugins with vim-plug
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/nvim/plugged')
 
   " Provides the Apprentice colour scheme
   Plug 'romainl/Apprentice'
@@ -120,3 +120,8 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+" Configure pythons
+"" https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
+let g:python_host_prog = '/Users/wilkox/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
