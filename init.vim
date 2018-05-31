@@ -29,6 +29,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   " vim-fugitive for git
   Plug 'tpope/vim-fugitive'
 
+  " vim-notes for uni notes
+  Plug 'xolox/vim-misc'
+  Plug 'xolox/vim-notes'
+
 " End plugin block
 call plug#end()
 
@@ -146,3 +150,39 @@ let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
 nnoremap <silent> <Leader>, :ArgWrap<CR>
 " Wrap closing brace to newline
 let g:argwrap_wrap_closing_brace = 1
+
+"" Uni notes
+" Function to generate Anki flashcards from notes
+function! MakeAnkiFlashCards ()
+  ! anki_from_notes.pl "%:p"
+endfunction
+nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
+" Insert timestamp
+iab <expr> dts strftime("%F")
+
+"" vim-notes
+" Set notes directory
+let g:notes_directories = ['~/stage_3_notes']
+" Disable indenting on tab keypress, as it overrides omnicompletion
+let g:notes_tab_indents = 0
+" Respect word boundaries
+let g:notes_word_boundaries = 1
+" Overwrite replacement of dashed lists with Unicode bullets
+" There is an option for this but it doesn't work
+" TODO submit this as a pull request at some point
+function! xolox#notes#get_bullet(chr)
+  return '-'
+endfunction
+" Highlight TODOs more obviously
+highlight link notesTodo DiffText
+" TODO italics
+highlight notesItalic ctermfg=black ctermbg=darkcyan
+" Don't highlight quoted text
+highlight link notesSingleQuoted normal
+highlight link notesDoubleQuoted normal
+" Soft wraps in notes
+autocmd FileType notes set wrap linebreak nolist textwidth=0 wrapmargin=0
+" No new note template
+let g:notes_shadowdir = "/tmp"
+" Don't recognise asterisks as bullets
+let g:notes_list_bullets = ['-']
