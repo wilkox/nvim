@@ -1,23 +1,33 @@
 " Plugins with vim-plug
-call plug#begin('~/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-  " Provides the Apprentice colour scheme
+  " Provides the Apprentice and Lightening colour schemes
   Plug 'romainl/Apprentice'
+  Plug 'wimstefan/Lightning'
 
   " Move between nvim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
 
-  " vim-easymotion
-  Plug 'easymotion/vim-easymotion'
-
-  " Nvim-R
+  " Nvim-R for R integration
   Plug 'jalvesaq/Nvim-R'
 
   " deoplete autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " vim-commentry
+  " vim-commentry for quickly commenting out lines
   Plug 'tpope/vim-commentary'
+
+  " vim-argwrap for wrapping function arguments neatly
+  Plug 'FooSoft/vim-argwrap'
+
+  " vim-surround for adding, changing and removing surroundings
+  Plug 'tpope/vim-surround'
+
+  " vim-dispatch for asynchronous builds
+  Plug 'tpope/vim-dispatch'
+
+  " vim-fugitive for git
+  Plug 'tpope/vim-fugitive'
 
 " End plugin block
 call plug#end()
@@ -36,9 +46,11 @@ let g:deoplete#enable_at_startup = 1
 "" Use TAB to complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" Show relative line numbers
+" Show relative line numbers, except in terminal panes
 set relativenumber
 set number
+au TermOpen * setlocal nonumber norelativenumber
+au TermChanged * setlocal nonumber norelativenumber
 
 " When a file is opened, open all folds by default
 set foldlevel=99
@@ -88,8 +100,10 @@ nnoremap zl 1z=
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
 "" Open R in a vertical split
-let R_tmux_split = 1
-let R_min_editor_width = 70
+" let R_in_buffer = 0
+" let R_applescript = 0
+" let R_tmux_split = 1
+" let R_min_editor_width = 70
 "" Disable mapping of "_" to " -> "
 let R_assign = 0
 "" Disable matching of <
@@ -125,3 +139,10 @@ set expandtab
 "" https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
 let g:python_host_prog = '/Users/wilkox/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
+
+" Configure vim-argwrap
+"" vim-argwrap
+" Set invocation to <Leader>,
+nnoremap <silent> <Leader>, :ArgWrap<CR>
+" Wrap closing brace to newline
+let g:argwrap_wrap_closing_brace = 1
