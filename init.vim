@@ -3,7 +3,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Provides the Apprentice and Lightening colour schemes
   Plug 'romainl/Apprentice'
-  Plug 'wimstefan/Lightning'
 
   " Move between nvim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
@@ -156,10 +155,17 @@ endfunction
 nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
 " Insert timestamp
 iab <expr> dts strftime("%F")
+" Script and mappings to link and open slides
+source ~/nvim/scripts/link_slides.vim
+nnoremap <Leader>ls :call link_slides#link_slides()<cr>
+nnoremap <Leader>os :call link_slides#open_slides()<cr>
+" Script and mapping to move study image
+source ~/nvim/scripts/move_image.vim
+vnoremap <Leader>mi :call move_image#move_image()<cr>
 
 "" vim-notes
 " Set notes directory
-let g:notes_directories = ['~/stage_3_notes']
+let g:notes_directories = ['~/term_C_PAAM/notes']
 " Disable indenting on tab keypress, as it overrides omnicompletion
 let g:notes_tab_indents = 0
 " Respect word boundaries
