@@ -1,71 +1,112 @@
-#!/Users/wilkox/perl5/perlbrew/perls/perl-5.26.1/bin/perl
+#!/usr/bin/perl
+use File::Copy;
 
-use Modern::Perl 2016;
-use Path::Tiny;
-use String::ShellQuote qw( shell_quote );
-use autodie;
-$|++;
+my $notesFile = shift;
 
-my $path = shift;
-open(IN, "<", $path);
-my $cornell_dir = "/Users/wilkox/tmp";
-mkdir $cornell_dir unless -d $cornell_dir;
-open(CORNELL, ">", "$cornell_dir/cornell.tsv");
-
-my $note;
-my $title;
-my @questions;
+die unless open(IN, "<", $notesFile);
+die unless open(BASIC, ">", "/Users/wilkox/tmp/basic.csv");
+die unless open(CLOZE, ">", "/Users/wilkox/tmp/cloze.csv");
+die unless open(DEFINITION, ">", "/Users/wilkox/tmp/definition.csv");
 while (readline IN) {
-
-  # Catch title
-  if ($. == 1) {
-    chomp;
-    $title = $_;
-
-    # Remove leading date
-    $title =~ s/^\d{4}-\d{2}-\d{2}\s//;
-    next;
-  }
 
   # Catch tags
   if ($. == 2) {
-    chomp;
     next unless /@/;
     s/@//g;
-    my @tags = split /\s+/, $_;
-    say CORNELL "tags: @tags";
+    my @tags = split(/\s+/, $_);
+    say BASIC "tags: @tags";
+    say CLOZE "tags: @tags";
+    say DEFINITION "tags: @tags";
+  }
+
+  # Only bullets become flash cards
+  next unless /^-/;
+
+  # Strip bullets
+  s/^-\s//;
+
+  # Strip newlines
+  chomp;
+
+  # Catch images and replace with html img links
+  # Check that media folder is still in the correct place
+  my $mediaFolder = '/Users/wilkox/Library/Application Support/Anki2/Medicine/collection.media';
+  die "Anki media folder could no longer be found at $mediaFolder" unless -d $mediaFolder;
+  if (/\!\[([^\]]+)\]/) {
+    my $match = $&;
+    my $img = $1;
+
+    # Check image exists
+    my $imgOldPath = "/Users/wilkox/Documents/study_images/$img.png";
+    die "Could not find image at $imgOldPath" unless -e $imgOldPath;
+
+    # Copy image to Anki media folder
+    my $imgNewPath = "$mediaFolder/$img.png";
+    copy($imgOldPath, $imgNewPath) or die "Copy failed";
+
+    # Put new path in img tag
+    my $imgTag = "<p><img src='$imgNewPath' alt='$img'></p>";
+    $_ =~ s/\Q$match/$imgTag/;
+  }
+
+  # Replace Markdown-style italics and bold with HTML tags
+  s/\*\*([^\*]+)\*\*/<b>$1<\/b>/g;
+  s/\*([^\*]+)\*/<i>$1<\/i>/g;
+
+  # Put newlines before bullets
+  s/•/<br>•/g;
+
+  # If the bullet contains a question mark, it's in 'question' format
+  if (/\?/) {
+
+    # Split fields
+    my @card = split(/\?/, $_);
+
+    # Cards in this format should only have two fields
+    unless (scalar @card == 2) {
+      warn("Skipping multi-field card at line $.");
+      next;
+    }
+
+    # Add to output
+    say BASIC "$card[0]?\t$card[1]"
+
+  # If the bullet contains a colon, it's in 'definition' format
+  } elsif (/:/) {
+
+    # Split fields
+    my @card = split(/:/, $_);
+
+    # Cards in this format should only have two fields
+    unless (scalar @card == 2) {
+      warn("Skipping multi-field card at line $.");
+      next;
+    }
+
+    $card[1] =~ s/^\s//;
+
+    # Add to output
+    say DEFINITION "$card[0]\t$card[1]";
+
+  # If the bullet contains square brackets, it's in 'cloze' format
+  } elsif (/\[/) {
+
+    # Convert to Anki cloze format
+    s/\]/\}\}/g;
+    my $ii = 1;
+    s/\[/"{{c".$ii++."::"/ge;
+    say CLOZE $_, "\t";
+
+  # If none of these, emit a warning and skip
+  } else {
+    warn("Could not determine type of card at line $., skipping");
     next;
   }
 
-  # Ignore blank lines
-  next if $_ eq "";
-
-  # Lines beginning with an question mark become questions
-  if (/^\?/) {
-
-    # Remove leading question mark and any whitespace
-    $_ =~ s/^\?\s?//;
-    chomp;
-
-    push @questions, $_;
-    next;
-  }
-
-  # Other lines get added to the note
-  $note .= $_;
 }
-
-# Convert note markdown to HTML
-path("/tmp/note_markdown")->spew($note);
-my $htmldir = "/Users/wilkox/stage_3_htmls/";
-mkdir $htmldir if ! -d $htmldir;
-my $htmlpath = $htmldir . path($path)->basename(".md") . ".html";
-my $pandoc = "pandoc -s -M title=" . shell_quote($title) . " /tmp/note_markdown -o ". shell_quote($htmlpath);
-system($pandoc);
-my $include = "<embed src='$htmlpath' style='width:500px; height: 300px;'>";
-
-# Write each question to file
-say CORNELL "$_\t$include" for @questions;
-
 close IN;
-close CORNELL;
+close BASIC;
+close CLOSE;
+close DEFINITION;
+
+print "Flashcards made";
