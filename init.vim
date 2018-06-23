@@ -103,11 +103,8 @@ nnoremap zl 1z=
 "" Press the space bar to send lines (in Normal mode) and selections to R:
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
-"" Open R in a vertical split
-" let R_in_buffer = 0
-" let R_applescript = 0
-" let R_tmux_split = 1
-" let R_min_editor_width = 70
+"" Consistent console width
+let R_setwidth = 2
 "" Disable mapping of "_" to " -> "
 let R_assign = 0
 "" Disable matching of <
