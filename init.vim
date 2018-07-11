@@ -191,3 +191,7 @@ autocmd FileType notes set wrap linebreak nolist textwidth=0 wrapmargin=0
 let g:notes_shadowdir = "/tmp"
 " Don't recognise asterisks as bullets
 let g:notes_list_bullets = ['-']
+
+"" vim-dispatch
+" Prevent apostrophe/single quote key mapping from stomping on ' -> : mapping 
+let g:nremap = {"'" : ""}
