@@ -162,6 +162,8 @@ nnoremap <Leader>os :call link_slides#open_slides()<cr>
 " Script and mapping to move study image
 source ~/nvim/scripts/move_image.vim
 vnoremap <Leader>mi :call move_image#move_image()<cr>
+" Abbreviation for 'cloze lists'
+iab c.. • []<Left>
 
 "" vim-notes
 " Set notes directory
