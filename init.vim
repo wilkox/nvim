@@ -32,6 +32,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
 
+  " vim-easy motion for easy movement
+  Plug 'easymotion/vim-easymotion'
+
 " End plugin block
 call plug#end()
 
@@ -167,7 +170,7 @@ iab c.. • []<Left>
 
 "" vim-notes
 " Set notes directory
-let g:notes_directories = ['~/term_C_PAAM/notes']
+let g:notes_directories = ['~/term_C_PAAM/notes', '~/term_D_CAH']
 " Disable indenting on tab keypress, as it overrides omnicompletion
 let g:notes_tab_indents = 0
 " Respect word boundaries
@@ -195,3 +198,9 @@ let g:notes_list_bullets = ['-']
 "" vim-dispatch
 " Prevent apostrophe/single quote key mapping from stomping on ' -> : mapping 
 let g:nremap = {"'" : ""}
+
+"" vim-easymotion
+" Bind motions to <Leader>, instead of <Leader><Leader>
+map <Leader> <Plug>(easymotion-prefix)
+" Bind s in normal mode to bi-directional single character search
+nmap s <Plug>(easymotion-s)
