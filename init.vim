@@ -170,7 +170,7 @@ iab c.. • []<Left>
 
 "" vim-notes
 " Set notes directory
-let g:notes_directories = ['~/term_C_PAAM/notes', '~/term_D_CAH']
+let g:notes_directories = ['~/term_C_PAAM/notes', '~/term_D_CAH', '~/term_B_medicine/notes']
 " Disable indenting on tab keypress, as it overrides omnicompletion
 let g:notes_tab_indents = 0
 " Respect word boundaries
