@@ -35,6 +35,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   " vim-easy motion for easy movement
   Plug 'easymotion/vim-easymotion'
 
+  " ack.vim for ack
+  Plug 'mileszs/ack.vim'
+
 " End plugin block
 call plug#end()
 
