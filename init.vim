@@ -125,6 +125,9 @@ iab << <-
 " Allow mouse input
 set mouse=a
 
+" Set scrolling buffer
+set scrolloff=4
+
 " In terminal mode, remap Esc so it actually escapes
 tnoremap <Esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
