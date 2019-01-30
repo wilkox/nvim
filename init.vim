@@ -38,6 +38,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   " ack.vim for ack
   Plug 'mileszs/ack.vim'
 
+  " tabular to align text across lines
+  Plug 'godlygeek/tabular'
+
 " End plugin block
 call plug#end()
 
@@ -183,10 +186,11 @@ let g:notes_tab_indents = 0
 let g:notes_word_boundaries = 1
 " Overwrite replacement of dashed lists with Unicode bullets
 " There is an option for this but it doesn't work
-" TODO submit this as a pull request at some point
-function! xolox#notes#get_bullet(chr)
-  return '-'
-endfunction
+" TODO commented this out because it was causing 'Function name does not match
+" script file name:' error
+" function! xolox#notes#get_bullet(chr)
+"   return '-'
+" endfunction
 " Highlight TODOs more obviously
 highlight link notesTodo DiffText
 " TODO italics
@@ -210,3 +214,7 @@ let g:nremap = {"'" : ""}
 map <Leader> <Plug>(easymotion-prefix)
 " Bind s in normal mode to bi-directional single character search
 nmap s <Plug>(easymotion-s)
+
+"" undo
+set undofile
+set undodir=~/nvim/undodir
