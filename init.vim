@@ -41,6 +41,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   " tabular to align text across lines
   Plug 'godlygeek/tabular'
 
+  " vim-vinegar to enhance netrw
+  Plug 'tpope/vim-vinegar'
+
 " End plugin block
 call plug#end()
 
@@ -218,3 +221,14 @@ nmap s <Plug>(easymotion-s)
 "" undo
 set undofile
 set undodir=~/nvim/undodir
+
+"" Try to stop netrw buffers from hanging around indefinitely
+"" from https://github.com/tpope/vim-vinegar/issues/13
+set nohidden
+augroup netrw_buf_hidden_fix
+  autocmd!
+  autocmd BufWinEnter *
+        \  if &ft != 'netrw'
+        \|     set bufhidden=hide
+        \| endif
+augroup end
