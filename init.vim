@@ -203,8 +203,6 @@ highlight link notesSingleQuoted normal
 highlight link notesDoubleQuoted normal
 " Soft wraps in notes
 autocmd FileType notes set wrap linebreak nolist textwidth=0 wrapmargin=0
-" No new note template
-let g:notes_shadowdir = "/tmp"
 " Don't recognise asterisks as bullets
 let g:notes_list_bullets = ['-']
 
