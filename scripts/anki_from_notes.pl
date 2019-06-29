@@ -68,6 +68,9 @@ while (readline IN) {
       next;
     }
 
+    # Strip leading newlines
+    $card[1] =~ s/^\s*<br>//g;
+
     # Add to output
     say BASIC "$card[0]?\t$card[1]"
 

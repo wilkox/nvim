@@ -127,6 +127,10 @@ let R_notmuxcong = 1
 "" R-friendly abbreviations
 iab >> %>%
 iab << <-
+"" Insert 'last updated' date into R Markdown header with lll
+iab <expr> lll 'Last updated `r lubridate::today()`'
+"" R Markdown skeleton
+autocmd BufNewFile *.Rmd 0r ~/nvim/skeletons/skeleton.Rmd
 
 " Allow mouse input
 set mouse=a
@@ -182,7 +186,7 @@ iab c.. • []<Left>
 
 "" vim-notes
 " Set notes directory
-let g:notes_directories = ['~/term_C_PAAM/notes', '~/term_D_CAH', '~/term_B_medicine/notes', '~/term_A_surgery/notes', '~/term_E_community/notes']
+let g:notes_directories = ['~/term_G_PWH/notes', '~/term_E_community/notes', '~/term_C_PAAM/notes', '~/term_D_CAH', '~/term_B_medicine/notes', '~/term_A_surgery/notes']
 " Disable indenting on tab keypress, as it overrides omnicompletion
 let g:notes_tab_indents = 0
 " Respect word boundaries
@@ -203,8 +207,6 @@ highlight link notesSingleQuoted normal
 highlight link notesDoubleQuoted normal
 " Soft wraps in notes
 autocmd FileType notes set wrap linebreak nolist textwidth=0 wrapmargin=0
-" No new note template
-let g:notes_shadowdir = "/tmp"
 " Don't recognise asterisks as bullets
 let g:notes_list_bullets = ['-']
 
