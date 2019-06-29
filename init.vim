@@ -152,8 +152,8 @@ set expandtab
 
 " Configure pythons
 "" https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
-let g:python_host_prog = '/Users/wilkox/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
+" let g:python_host_prog = '/Users/wilkox/.pyenv/versions/neovim2/bin/python'
+" let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
 
 " Configure vim-argwrap
 "" vim-argwrap
@@ -232,3 +232,6 @@ augroup netrw_buf_hidden_fix
         \|     set bufhidden=hide
         \| endif
 augroup end
+
+" Enable true colour support
+set termguicolors
