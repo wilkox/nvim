@@ -2,12 +2,15 @@
 title: 
 author: David Wilkins
 date: Last updated `r lubridate::today()`
+output:
+  html_document:
+    toc: true
+    theme: readable
 ---
 
 ```{r global_options, include = FALSE}
 library(knitr)
-opts_chunk$set(fig.width = 12, fig.height = 8, echo = TRUE,
-               warning = FALSE, message = FALSE)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ```{r message = FALSE}
