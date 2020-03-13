@@ -1,6 +1,12 @@
 " Plugins with vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
+  " A filetype plugin for csv files
+  Plug 'chrisbra/csv.vim'
+
+  " Provides some utilities for managing terminal splits
+  Plug 'vimlab/split-term.vim'
+
   " Provides the Apprentice and Lightening colour schemes
   Plug 'romainl/Apprentice'
 
@@ -30,7 +36,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " vim-notes for uni notes
   Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-notes'
+  Plug 'wilkox/vim-notes'
 
   " vim-easy motion for easy movement
   Plug 'easymotion/vim-easymotion'
@@ -174,6 +180,8 @@ endfunction
 nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
 " Insert timestamp
 iab <expr> dts strftime("%F")
+" Insert bullet
+iab <expr> ;; '•'
 " Script and mappings to link and open slides
 source ~/nvim/scripts/link_slides.vim
 nnoremap <Leader>ls :call link_slides#link_slides()<cr>
@@ -186,21 +194,13 @@ iab c.. • []<Left>
 
 "" vim-notes
 " Set notes directory
-let g:notes_directories = ['~/term_G_PWH/notes', '~/term_E_community/notes', '~/term_C_PAAM/notes', '~/term_D_CAH', '~/term_B_medicine/notes', '~/term_A_surgery/notes']
+let g:notes_directories = ['~/med_school/term_I_cc/notes', '~/med_school/long_case', '~/med_school/term_G_PWH/notes', '~/med_school/term_E_community/notes', '~/med_school/term_C_PAAM/notes', '~/med_school/term_D_CAH', '~/med_school/term_B_medicine/notes', '~/med_school/term_A_surgery/notes']
 " Disable indenting on tab keypress, as it overrides omnicompletion
 let g:notes_tab_indents = 0
 " Respect word boundaries
 let g:notes_word_boundaries = 1
-" Overwrite replacement of dashed lists with Unicode bullets
-" There is an option for this but it doesn't work
-" TODO commented this out because it was causing 'Function name does not match
-" script file name:' error
-" function! xolox#notes#get_bullet(chr)
-"   return '-'
-" endfunction
 " Highlight TODOs more obviously
 highlight link notesTodo DiffText
-" TODO italics
 highlight notesItalic ctermfg=black ctermbg=darkcyan
 " Don't highlight quoted text
 highlight link notesSingleQuoted normal
@@ -237,3 +237,8 @@ augroup end
 
 " Enable true colour support
 set termguicolors
+
+" split-term
+"" Add localleader mappings for new terminal splits
+nnoremap <LocalLeader>t :Term<cr>
+nnoremap <LocalLeader>vt :VTerm<cr>
