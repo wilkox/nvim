@@ -88,6 +88,9 @@ while (readline IN) {
 
     $card[1] =~ s/^\s//;
 
+    # Lower-case the term
+    $card[0] = lc($card[0]);
+
     # Add to output
     say DEFINITION "$card[0]\t$card[1]";
 
