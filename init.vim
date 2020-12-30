@@ -1,6 +1,9 @@
 " Plugins with vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
+  " Ctrl-P
+  Plug 'ctrlpvim/ctrlp.vim'
+
   " A filetype plugin for csv files
   Plug 'chrisbra/csv.vim'
 
@@ -83,7 +86,7 @@ set expandtab
 set softtabstop=2 tabstop=2
 set shiftwidth=2 
 
-" Set Apprentice as the colourscheme
+" Set apprentice as the colourscheme
 colorscheme apprentice
 
 " Synchronise the unnamed register with the system clipboard
