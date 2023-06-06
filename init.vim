@@ -245,3 +245,6 @@ set termguicolors
 "" Add localleader mappings for new terminal splits
 nnoremap <LocalLeader>t :Term<cr>
 nnoremap <LocalLeader>vt :VTerm<cr>
+
+" Render markdown to PDF without fuss
+command! MakePDF :w !pandoc -f markdown -t pdf --pdf-engine=xelatex -o %:r.pdf
