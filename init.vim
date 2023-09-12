@@ -37,10 +37,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " vim-fugitive for git
   Plug 'tpope/vim-fugitive'
 
-  " vim-notes for uni notes
-  Plug 'xolox/vim-misc'
-  Plug 'wilkox/vim-notes'
-
   " vim-easy motion for easy movement
   Plug 'easymotion/vim-easymotion'
 
