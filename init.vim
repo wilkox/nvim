@@ -130,8 +130,9 @@ let R_tmux_title = "automatic"
 "" Use my own tmux config
 let R_notmuxcong = 1
 "" R-friendly abbreviations
-iab >> %>%
+iab >> |>
 iab << <-
+iab <expr> %>% '\|>'
 "" Insert 'last updated' date into R Markdown header with lll
 iab <expr> lll 'Last updated `r lubridate::today()`'
 "" R Markdown skeleton
