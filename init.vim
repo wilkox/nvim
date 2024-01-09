@@ -172,44 +172,6 @@ nnoremap <silent> <Leader>, :ArgWrap<CR>
 " Wrap closing brace to newline
 let g:argwrap_wrap_closing_brace = 1
 
-"" Uni notes
-" Function to generate Anki flashcards from notes
-function! MakeAnkiFlashCards ()
-  ! anki_from_notes.pl "%:p"
-endfunction
-nnoremap <Leader>fc :call MakeAnkiFlashCards()<cr>
-" Insert timestamp
-iab <expr> dts strftime("%F")
-" Insert bullet
-iab <expr> ;; '•'
-" Script and mappings to link and open slides
-source ~/nvim/scripts/link_slides.vim
-nnoremap <Leader>ls :call link_slides#link_slides()<cr>
-nnoremap <Leader>os :call link_slides#open_slides()<cr>
-" Script and mapping to move study image
-source ~/nvim/scripts/move_image.vim
-vnoremap <Leader>mi :call move_image#move_image()<cr>
-" Abbreviation for 'cloze lists'
-iab c.. • []<Left>
-
-"" vim-notes
-" Set notes directory
-let g:notes_directories = ['~/med_school/term_I_cc/notes', '~/med_school/long_case', '~/med_school/term_G_PWH/notes', '~/med_school/term_E_community/notes', '~/med_school/term_C_PAAM/notes', '~/med_school/term_D_CAH', '~/med_school/term_B_medicine/notes', '~/med_school/term_A_surgery/notes']
-" Disable indenting on tab keypress, as it overrides omnicompletion
-let g:notes_tab_indents = 0
-" Respect word boundaries
-let g:notes_word_boundaries = 1
-" Highlight TODOs more obviously
-highlight link notesTodo DiffText
-highlight notesItalic ctermfg=black ctermbg=darkcyan
-" Don't highlight quoted text
-highlight link notesSingleQuoted normal
-highlight link notesDoubleQuoted normal
-" Soft wraps in notes
-autocmd FileType notes set wrap linebreak nolist textwidth=0 wrapmargin=0
-" Don't recognise asterisks as bullets
-let g:notes_list_bullets = ['-']
-
 "" vim-dispatch
 " Prevent apostrophe/single quote key mapping from stomping on ' -> : mapping 
 let g:nremap = {"'" : ""}
