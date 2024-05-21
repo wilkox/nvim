@@ -129,12 +129,6 @@ let R_rnowebchunk = 0
 let R_tmux_title = "automatic"
 "" Use my own tmux config
 let R_notmuxcong = 1
-"" R-friendly abbreviations
-iab >> |>
-iab << <-
-" iab <expr> %>% '\|>'
-"" Insert 'last updated' date into R Markdown header with lll
-iab <expr> lll 'Last updated `r lubridate::today()`'
 "" R Markdown skeleton
 autocmd BufNewFile *.Rmd 0r ~/nvim/skeletons/skeleton.Rmd
 
@@ -159,6 +153,37 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+" Set indentation for .R and .Rmd files
+filetype plugin indent on
+
+"" Function to handle custom indentation for .R and .Rmd files
+function! R_indent()
+    let lnum = prevnonblank(v:lnum - 1)
+    let line = getline(lnum)
+    let curr_line = getline(v:lnum)
+
+    " Check if the current line begins with a closing parenthesis, brace, or bracket
+    if curr_line =~ '^\s*[)\]}]\s*$'
+        " Reduce the indent level by one soft tab (two spaces)
+        return indent(lnum) - &shiftwidth
+    endif
+
+    " Check if the current line ends with an opening parenthesis, brace, or bracket
+    if line =~ '.*(\s*$\|{\s*$\|\[\s*$'
+        " Increase the indent level by one soft tab (two spaces)
+        return indent(lnum) + &shiftwidth
+    endif
+
+    return -1
+endfunction
+
+"" Apply the custom indentation function to .R and .Rmd files
+augroup RFileIndent
+  autocmd!
+  autocmd FileType r setlocal indentexpr=R_indent()
+  autocmd FileType rmd setlocal indentexpr=R_indent()
+augroup END
 
 " Configure pythons
 "" https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
