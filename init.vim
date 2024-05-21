@@ -22,32 +22,35 @@ call plug#begin('~/.local/share/nvim/plugged')
   " deoplete autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " vim-commentry for quickly commenting out lines
+  " Quickly comment out lines
   Plug 'tpope/vim-commentary'
 
-  " vim-argwrap for wrapping function arguments neatly
+  " Wrap function arguments neatly
   Plug 'FooSoft/vim-argwrap'
 
-  " vim-surround for adding, changing and removing surroundings
+  " Add, change, and remove surroundings
   Plug 'tpope/vim-surround'
 
-  " vim-dispatch for asynchronous builds
+  " Asynchronous builds
   Plug 'tpope/vim-dispatch'
 
-  " vim-fugitive for git
+  " git support
   Plug 'tpope/vim-fugitive'
 
-  " vim-easy motion for easy movement
+  " Easy movement
   Plug 'easymotion/vim-easymotion'
 
-  " ack.vim for ack
+  " ack
   Plug 'mileszs/ack.vim'
 
-  " tabular to align text across lines
+  " Align text across lines
   Plug 'godlygeek/tabular'
 
-  " vim-vinegar to enhance netrw
+  " Enhance netrw
   Plug 'tpope/vim-vinegar'
+
+  " Automatically close parentheses, etc.
+  Plug 'cohama/lexima.vim'
 
 " End plugin block
 call plug#end()
