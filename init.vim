@@ -49,9 +49,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Enhance netrw
   Plug 'tpope/vim-vinegar'
 
-  " Automatically close parentheses, etc.
-  Plug 'cohama/lexima.vim'
-
 " End plugin block
 call plug#end()
 
