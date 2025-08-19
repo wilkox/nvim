@@ -15,6 +15,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   " R.nvim
   Plug 'R-nvim/R.nvim'
 
+  " Required for air
+  Plug 'neovim/nvim-lspconfig'
+
   " Provides some utilities for managing terminal splits
   Plug 'vimlab/split-term.vim'
 
@@ -119,6 +122,9 @@ set spellfile=$HOME/nvim/spellfile.add
 set spellcapcheck=
 "" Remap zl to correct to first option
 nnoremap zl 1z=
+
+" Load Air (https://posit-dev.github.io/air/editor-neovim.html)
+lua require('air')
 
 " Configure R.nvim (formerly nvim-R) plugin
 "" Press the space bar to send lines (in Normal mode) and selections to R:
