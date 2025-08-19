@@ -7,17 +7,22 @@ call plug#begin('~/.local/share/nvim/plugged')
   " A filetype plugin for csv files
   Plug 'chrisbra/csv.vim'
 
+  " Required for R.nvim
+  Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main' }
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'R-nvim/cmp-r'
+
+  " R.nvim
+  Plug 'R-nvim/R.nvim'
+
   " Provides some utilities for managing terminal splits
   Plug 'vimlab/split-term.vim'
 
   " Provides the Apprentice and Lightening colour schemes
-  Plug 'romainl/Apprentice'
+  Plug 'romainl/Apprentice', { 'branch': 'fancylines-and-neovim' }
 
   " Move between nvim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
-
-  " Nvim-R for R integration
-  Plug 'jalvesaq/Nvim-R'
 
   " deoplete autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -115,22 +120,22 @@ set spellcapcheck=
 "" Remap zl to correct to first option
 nnoremap zl 1z=
 
-" Configure nvim-R plugin
+" Configure R.nvim (formerly nvim-R) plugin
 "" Press the space bar to send lines (in Normal mode) and selections to R:
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
 "" Consistent console width
 let R_setwidth = 2
 "" Disable mapping of "_" to " -> "
-let R_assign = 0
+" let R_assign = 0
 "" Disable matching of <
-let R_rnowebchunk = 0
+" let R_rnowebchunk = 0
 "" Don't clobber the tmux window title
-let R_tmux_title = "automatic"
+" let R_tmux_title = "automatic"
 "" Use my own tmux config
-let R_notmuxcong = 1
+" let R_notmuxcong = 1
 "" R Markdown skeleton
-autocmd BufNewFile *.Rmd 0r ~/nvim/skeletons/skeleton.Rmd
+" autocmd BufNewFile *.Rmd 0r ~/nvim/skeletons/skeleton.Rmd
 
 " Allow mouse input
 set mouse=a
