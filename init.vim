@@ -243,3 +243,6 @@ nnoremap <LocalLeader>vt :VTerm<cr>
 
 " Render markdown to PDF without fuss
 command! MakePDF :w !pandoc -f markdown -t pdf --pdf-engine=xelatex -o %:r.pdf
+
+" Temporarily clear formatexpr before using gq
+nnoremap gq :set formatexpr=<CR>gq
