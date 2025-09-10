@@ -4,9 +4,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Ctrl-P
   Plug 'ctrlpvim/ctrlp.vim'
 
-  " A filetype plugin for csv files
-  Plug 'chrisbra/csv.vim'
-
   " Required for R.nvim
   Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main' }
   Plug 'hrsh7th/nvim-cmp'
