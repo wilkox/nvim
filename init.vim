@@ -241,5 +241,10 @@ nnoremap <LocalLeader>vt :VTerm<cr>
 " Render markdown to PDF without fuss
 command! MakePDF :w !pandoc -f markdown -t pdf --pdf-engine=xelatex -o %:r.pdf
 
-" Temporarily clear formatexpr before using gq
-nnoremap gq :set formatexpr=<CR>gq
+" Ensure formatexpr doesn't interfere with comment formatting in R files
+augroup FormatExprFix
+  autocmd!
+  autocmd FileType r,rmd setlocal formatexpr=
+  autocmd FileType r,rmd setlocal textwidth=80
+  autocmd FileType r,rmd setlocal formatoptions+=ro
+augroup END
