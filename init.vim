@@ -246,5 +246,5 @@ augroup FormatExprFix
   autocmd!
   autocmd FileType r,rmd setlocal formatexpr=
   autocmd FileType r,rmd setlocal textwidth=80
-  autocmd FileType r,rmd setlocal formatoptions+=ro
+  autocmd FileType r,rmd setlocal formatoptions+=rot
 augroup END
