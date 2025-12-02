@@ -24,9 +24,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Move between nvim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
 
-  " deoplete autocompletion
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
   " Quickly comment out lines
   Plug 'tpope/vim-commentary'
 
@@ -65,11 +62,6 @@ filetype plugin on
 let mapleader=","
 "" Map localleader to backslash
 let maplocalleader = "\\"
-
-" Configure deoplete autocompletion plugin
-let g:deoplete#enable_at_startup = 1
-"" Use TAB to complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Show relative line numbers, except in terminal panes
 set relativenumber
