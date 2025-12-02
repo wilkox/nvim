@@ -2,6 +2,9 @@
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
+  -- nvim-lspconfig, required for Air
+  Plug('neovim/nvim-lspconfig')
+
   -- Fuzzy file finder
   Plug('ctrlpvim/ctrlp.vim')
 
@@ -173,3 +176,18 @@ autocmd('BufWinEnter', {
     end
   end,
 })
+
+-- Air R formatter and language server. The air binary is installed from
+-- homebrew (air). https://posit-dev.github.io/air/editor-neovim.html
+local lsp = vim.lsp
+lsp.config['air'] = {
+    on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                lsp.buf.format()
+            end,
+        })
+    end,
+}
+lsp.enable('air')
