@@ -114,7 +114,7 @@ set spell
 "" Set language to Australian English
 set spelllang=en_au
 "" Define spell file
-set spellfile=$HOME/nvim/spellfile.add
+set spellfile=~/.local/share/nvim/spell/spellfile.add
 "" Don't highlight capitalisation
 set spellcapcheck=
 "" Remap zl to correct to first option
@@ -217,7 +217,7 @@ nmap s <Plug>(easymotion-s)
 
 "" undo
 set undofile
-set undodir=~/nvim/undodir
+set undodir=~/.local/state/nvim/undo
 
 "" Try to stop netrw buffers from hanging around indefinitely
 "" from https://github.com/tpope/vim-vinegar/issues/13
