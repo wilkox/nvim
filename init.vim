@@ -54,8 +54,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " End plugin block
 call plug#end()
 
-" Allow filetype plugins
-filetype plugin on
+" Allow filetype plugins and load filetype-specific indentation rules
+filetype plugin indent on
 
 " Define the leader and localleader
 "" Map Leader to comma
@@ -71,13 +71,6 @@ au TermChanged * setlocal nonumber norelativenumber
 
 " When a file is opened, open all folds by default
 set foldlevel=99
-
-" Use spaces instead of hard tabs
-set expandtab
-
-" Set soft tab to 2 spaces
-set softtabstop=2 tabstop=2
-set shiftwidth=2 
 
 " Set apprentice as the colourscheme
 colorscheme apprentice
@@ -121,16 +114,8 @@ vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
 "" Consistent console width
 let R_setwidth = 2
-"" Disable mapping of "_" to " -> "
-" let R_assign = 0
-"" Disable matching of <
-" let R_rnowebchunk = 0
-"" Don't clobber the tmux window title
-" let R_tmux_title = "automatic"
-"" Use my own tmux config
-" let R_notmuxcong = 1
 "" R Markdown skeleton
-" autocmd BufNewFile *.Rmd 0r ~/nvim/skeletons/skeleton.Rmd
+autocmd BufNewFile *.Rmd 0r $XDG_CONFIG_HOME/nvim/skeletons/skeleton.Rmd
 
 " Allow mouse input
 set mouse=a
@@ -153,9 +138,6 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-
-" Set indentation for .R and .Rmd files
-filetype plugin indent on
 
 "" Function to handle custom indentation for .R and .Rmd files
 function! R_indent()
@@ -184,11 +166,6 @@ augroup RFileIndent
   autocmd FileType r setlocal indentexpr=R_indent()
   autocmd FileType rmd setlocal indentexpr=R_indent()
 augroup END
-
-" Configure pythons
-"" https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
-" let g:python_host_prog = '/Users/wilkox/.pyenv/versions/neovim2/bin/python'
-" let g:python3_host_prog = '/Users/wilkox/.pyenv/versions/neovim3/bin/python'
 
 " Configure vim-argwrap
 "" vim-argwrap
